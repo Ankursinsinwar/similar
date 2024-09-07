@@ -16,7 +16,7 @@ def media_upload(request):
             
             # Call the Selenium script for image
             search_results = upload_and_search_image(image_path)
-            return render(request, 'similar/result.html', {'results': search_results})
+            return render(request, 'similar/upload.html', {'form': form,'results': search_results})
     else:
         form = MediaUploadForm()
     

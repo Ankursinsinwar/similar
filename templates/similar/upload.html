@@ -2,6 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Upload Image and see result</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center">Upload an Image</h1>
+
+        <form method="post" enctype="multipart/form-data" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+        {% if results %}
+        <div class="mt-5">
+            <h1 class="text-center">Search Results</h1>
+            <div class="row">
+                {% for result in results %}
+                <div class="col-md-6 mt-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ result.image_url }}" class="card-img-top" alt="Result Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ result.domain_name }}</h5>
+                            <a href="{{ result.source_link }}" class="btn btn-primary" target="_blank">Visit Source</a>
+                            <p class="card-text mt-3"><small class="text-muted">{{ result.metadata }}</small></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <title>Image Upload</title>
 </head>
 <body>
@@ -17,4 +69,4 @@
         <pre>{{ results|json_script:"results" }}</pre>
     {% endif %}
 </body>
-</html>
+</html> {% endcomment %}

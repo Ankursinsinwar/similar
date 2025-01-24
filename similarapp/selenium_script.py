@@ -1,10 +1,11 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementClickInterceptedException, ElementNotInteractableException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 import os , time
 
 chrome_driver_path = 'C:/webdriver/chromedriver.exe'
@@ -31,7 +32,8 @@ def upload_and_search_image(image_path):
     absolute_image_path = os.path.abspath(image_path)
     
     # Initialize the ChromeDriver using the Service class
-    service = Service(executable_path=chrome_driver_path)
+    # service = Service(executable_path=chrome_driver_path)
+    service = Service(ChromeDriverManager().install())
     # driver = webdriver.Chrome(service=service)
     driver = webdriver.Chrome(service=service,  options=options)
     # driver.get('https://amazon.com/')

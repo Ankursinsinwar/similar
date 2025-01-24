@@ -1,2 +1,3 @@
 venv,
-similarapp\__pycache__\
+similarapp\__pycache__\*,
+similarapp\__pycache__
